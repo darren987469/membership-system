@@ -1,35 +1,33 @@
 require 'rails_helper'
 
-module Admin
-  describe UserPolicy do
-    subject { described_class.new(user, nil) }
+describe Admin::UserPolicy do
+  subject { described_class.new(user, nil) }
 
-    context 'when normal user' do
-      let(:user) { create(:user, role: :normal) }
+  context 'when normal user' do
+    let(:user) { create(:user, role: :normal) }
 
-      it { should_not permit(:index) }
-      it { should_not permit(:promote_admin) }
-    end
+    it { should_not permit(:index) }
+    it { should_not permit(:promote_admin) }
+  end
 
-    context 'when premium user' do
-      let(:user) { create(:user, role: :premium) }
+  context 'when premium user' do
+    let(:user) { create(:user, role: :premium) }
 
-      it { should_not permit(:index) }
-      it { should_not permit(:promote_admin) }
-    end
+    it { should_not permit(:index) }
+    it { should_not permit(:promote_admin) }
+  end
 
-    context 'when admin user' do
-      let(:user) { create(:user, role: :admin) }
+  context 'when admin user' do
+    let(:user) { create(:user, role: :admin) }
 
-      it { should permit(:index) }
-      it { should_not permit(:promote_admin) }
-    end
+    it { should permit(:index) }
+    it { should_not permit(:promote_admin) }
+  end
 
-    context 'when owner user' do
-      let(:user) { create(:user, role: :owner) }
+  context 'when owner user' do
+    let(:user) { create(:user, role: :owner) }
 
-      it { should permit(:index) }
-      it { should permit(:promote_admin) }
-    end
+    it { should permit(:index) }
+    it { should permit(:promote_admin) }
   end
 end
