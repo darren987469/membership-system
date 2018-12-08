@@ -7,6 +7,7 @@ describe Entity::V1::User do
 
   subject { entity.as_json }
 
+  it { expect(subject[:id]).to eq user.id }
   it { expect(subject[:email]).to eq user.email }
   it { expect(subject[:role]).to eq user.role }
 end
