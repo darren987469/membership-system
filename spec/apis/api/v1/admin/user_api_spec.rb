@@ -29,4 +29,28 @@ describe API::V1::Admin::UserAPI, type: :request do
       expect(response.body).to eq expected_body
     end
   end
+
+  describe 'PATCH /api/v1/admin/users/:id/promote_to_admin' do
+    let(:user) { create(:user) }
+    let(:current_user) { create(:user, role: :owner) }
+    let(:endpoint) { "/api/v1/admin/users/#{user.id}/promote_to_admin" }
+
+    subject { patch endpoint }
+
+    before do
+      sign_in current_user
+      expect_any_instance_of(Admin::UserPolicy).to receive(:promote_admin?).and_return(true)
+    end
+
+    it 'returns 200 and the user' do
+      subject
+
+      expect(response).to have_http_status 200
+      expect(response.body).to eq Entity::V1::User.represent(user.reload).to_json
+    end
+
+    it 'updates user role to admin' do
+      expect { subject }.to change { user.reload.role }.from('normal').to('admin')
+    end
+  end
 end
