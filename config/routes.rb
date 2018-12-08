@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index update]
-    resources :products, only: %i[index create update]
+    resources :products, only: %i[index show create new edit update]
   end
 end
