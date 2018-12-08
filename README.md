@@ -1,9 +1,8 @@
 # Membership System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+[![Build Status](https://travis-ci.org/darren987469/membership-system.svg?branch=master)](https://travis-ci.org/darren987469/membership-system)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b0cb26d0fbddb0624aa0/maintainability)](https://codeclimate.com/github/darren987469/membership-system/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/darren987469/membership-system/badge.svg?branch=master)](https://coveralls.io/github/darren987469/membership-system?branch=master)
 
 ## Install
 

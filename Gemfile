@@ -5,6 +5,7 @@ ruby '2.5.3'
 
 gem 'awesome_rails_console'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'coveralls', require: false
 gem 'devise'
 gem 'grape'
 gem 'grape-entity'
