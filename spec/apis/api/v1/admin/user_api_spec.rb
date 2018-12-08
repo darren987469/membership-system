@@ -19,13 +19,8 @@ describe API::V1::Admin::UserAPI, type: :request do
       expect(response).to have_http_status 200
 
       users = User.order(id: :asc).page(params[:page]).per(params[:per_page])
-      links = PaginationService.new(users).links(request)
-      paginated_users = OpenStruct.new(
-        collection: users,
-        links: OpenStruct.new(links)
-      )
 
-      expected_body = Entity::V1::PaginatedUser.represent(paginated_users).to_json
+      expected_body = Entity::V1::PaginatedUser.represent(users).to_json
       expect(response.body).to eq expected_body
     end
   end
