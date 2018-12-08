@@ -3,20 +3,20 @@ class AdminUsersContainer extends React.Component {
     super(props)
     this.state = {
       users: [],
-      links: {}
+      page: 1,
+      perPage: 10,
+      totalCount: null
     }
     this.getUsersRequest = this.getUsersRequest.bind(this)
     this.promoteToAdminRequest = this.promoteToAdminRequest.bind(this)
   }
 
   getUsersRequest() {
+    const { page, perPage } = this.state
     Request.request({}, {
-      url: `/api/v1/admin/users?page=1&per_page=10`,
+      url: `/api/v1/admin/users?page=${page}&per_page=${perPage}`,
       success: (data) => {
-        this.setState({
-          users: data.results,
-          links: data.links
-        })
+        this.setState({ users: data.results, totalCount: data.total_count })
       }
     })
   }
