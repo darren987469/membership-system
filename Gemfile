@@ -7,6 +7,7 @@ gem 'awesome_rails_console'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coveralls', require: false
 gem 'devise'
+gem 'faker', require: false
 gem 'grape'
 gem 'grape-entity'
 gem 'jquery-rails'
