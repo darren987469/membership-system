@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :products, only: %i[index]
 
   namespace :admin do
-    resources :users, only: %i[index]
+    resources :users, only: %i[index update]
+    resources :products, only: %i[index create update]
   end
 end
