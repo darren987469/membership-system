@@ -13,7 +13,7 @@ module API
           get do
             authorize User, :index?, policy_class: ::Admin::UserPolicy
 
-            users = User.all
+            users = User.order(id: :asc)
             paginate users, with: Entity::V1::PaginatedUser
           end
 

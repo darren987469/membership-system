@@ -18,7 +18,7 @@ describe API::V1::Admin::UserAPI, type: :request do
       subject
       expect(response).to have_http_status 200
 
-      users = User.page(params[:page]).per(params[:per_page])
+      users = User.order(id: :asc).page(params[:page]).per(params[:per_page])
       links = PaginationService.new(users).links(request)
       paginated_users = OpenStruct.new(
         collection: users,
