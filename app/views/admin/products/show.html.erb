@@ -1,0 +1,18 @@
+<p>
+  <strong>Name: </strong><%= @product.name %>
+</p>
+
+<p>
+  <strong>Price: </strong><%= @product.price %>
+</p>
+
+<ul>
+  <% @product.images.each do |image| %>
+    <li>
+      <%= image_tag(url_for(image), size: product_image_default_size) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= button_to('Edit', edit_admin_product_path(@product), method: :get) %>
+<%= button_to('Back', admin_products_path) %>
