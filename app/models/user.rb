@@ -10,4 +10,13 @@ class User < ApplicationRecord
     admin: 700,
     owner: 999
   }
+
+  def discount_percent
+    case role
+    when 'normal'
+      0
+    else
+      10
+    end
+  end
 end
