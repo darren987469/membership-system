@@ -7,48 +7,27 @@ describe Helper::Pagination do
         expose :id
       end
     end
-
-    subject { described_class.paginated_entity_class(IdEntity) }
+    let(:entity_class) { described_class.paginated_entity_class(IdEntity) }
 
     it 'returns a class extend Grape::Entity' do
-      expect(subject.ancestors).to include Grape::Entity
+      expect(entity_class.ancestors).to include Grape::Entity
     end
 
     it 'documents every attributes' do
-      expect(subject.documentation.keys).to match_array %i[results links page per_page]
-    end
-  end
-
-  describe '#paginated_object' do
-    let(:request_env) { Rack::MockRequest.env_for('http://localhost:3000') }
-    let(:request) { Rack::Request.new(request_env) }
-    let(:collection) { User.page(1).per(1) }
-    let(:klass) do
-      Class.new do
-        include Helper::Pagination
-
-        attr_reader :params, :request
-
-        def initialize(params, request)
-          @params = params
-          @request = request
-        end
-      end
-    end
-    let(:params) { { page: 1, per_page: 1 } }
-    let(:instance) { klass.new(params, request) }
-
-    subject { instance.paginated_object(collection) }
-
-    before { create_list(:user, 3) }
-
-    it 'responds to collection' do
-      expect(subject.collection).to eq collection
+      expect(entity_class.documentation.keys).to match_array %i[results page per_page total_count]
     end
 
-    it 'responds to links' do
-      links = PaginationService.new(collection).links(request)
-      expect(subject.links).to eq OpenStruct.new(links)
+    it 'accepts paginated collection' do
+      create_list(:user, 5)
+      collection = User.all.page(1).per(2)
+
+      subject = entity_class.represent(collection).as_json
+
+      expected_collection = collection.map { |record| IdEntity.represent(record).as_json }
+      expect(subject[:results]).to eq expected_collection
+      expect(subject[:page]).to eq 1
+      expect(subject[:per_page]).to eq 2
+      expect(subject[:total_count]).to eq 5
     end
   end
 end
