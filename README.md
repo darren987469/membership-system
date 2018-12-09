@@ -27,8 +27,16 @@ Before committing, git hook run `rubocop`. Before pushing, git hook run `rspec`.
 
 Ignore git hook: `SKIP=RuboCop git commit`
 
+### Development flow
+
+Basically follow [git flow]((http://nvie.com/posts/a-successful-git-branching-model/)).
+
+1. Create a new branch to solve an issue in [issues page](https://github.com/darren987469/membership-system/issues).
+2. Open a Pull Request. Make sure CI test pass.
+3. After reviewing and approving, merge the Pull Request.
+
 ## Testing
 
 ```shell
-bundle exec rspec
+bundle exec rake
 ```
