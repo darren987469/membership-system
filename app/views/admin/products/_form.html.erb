@@ -1,8 +1,14 @@
 <%= form_for [:admin, @product] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, required: true %>
-  <%= f.label :price, required: true %>
-  <%= f.number_field :price, step: 1 %>
-  <%= f.file_field :images, multiple: true %>
-  <%= f.submit %>
+  <p>
+    <%= f.text_field :name, required: true, class: 'w3-input' %>
+    <%= f.label :name %>
+  </p>
+  <p>
+    <%= f.number_field :price, step: 1, class: 'w3-input' %>
+    <%= f.label :price, required: true %>
+  </p>
+  <p>
+    <%= f.file_field :images, multiple: true, class: 'w3-input' %>
+  </p>
+  <%= f.submit class: default_button_class %>
 <% end %>

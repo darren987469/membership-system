@@ -2,11 +2,11 @@
 
 <h2> Products </h2>
 <p>
-  <%= button_to('New product', new_admin_product_path, method: :get) %>
+  <%= button_to('New product', new_admin_product_path, method: :get, class: default_button_class) %>
 </p>
-<table>
+<table class="w3-table-all">
   <thead>
-    <tr>
+    <tr class="w3-grey">
       <th>Name</th>
       <th>Price</th>
       <th>Image</th>

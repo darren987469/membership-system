@@ -30,8 +30,10 @@ describe ProductsController, type: :request do
       it 'renders logout link' do
         subject
 
-        logout_link = link_to('Logout', destroy_user_session_path, method: :delete)
-        expect(response.body).to include logout_link
+        logout_text = 'Logout'
+        logout_path = destroy_user_session_path
+        logout_method = 'delete'
+        expect(response.body).to include(logout_text, logout_path, logout_method)
       end
     end
   end

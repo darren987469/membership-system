@@ -1,9 +1,9 @@
 function AdminUserTable(props) {
   const { users, currentUser, promoteToAdminRequest } = props
   return(
-    <table>
+    <table className="w3-table-all" style={{ marginTop: '30px' }}>
       <thead>
-        <tr>
+        <tr className="w3-grey">
           <th>Email</th>
           <th>Membership</th>
           <th></th>
@@ -29,7 +29,10 @@ function UserTableRow(props) {
   const { user, currentUser, promoteToAdminRequest } = props
   let button = null
   if(user.id != currentUser.id && (user.role === 'normal' || user.role === 'premium')){
-    button = <button onClick={() => promoteToAdminRequest(user.id)}>Promote to Admin</button>
+    button =
+      <button onClick={() => promoteToAdminRequest(user.id)} className="w3-button w3-teal w3-ripple">
+        Promote to Admin
+      </button>
   }
   return(
     <tr>

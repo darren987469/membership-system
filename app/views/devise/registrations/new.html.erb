@@ -1,0 +1,33 @@
+<div class="w3-container" style="width: 50%; margin: auto;">
+  <div class="w3-padding-32"></div>
+  <h2>Sign up</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'w3-container w3-card-4' }) do |f| %>
+    <div class="w3-padding-16"></div>
+    <%= devise_error_messages! %>
+
+    <p>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'w3-input' %>
+      <%= f.label :email %>
+    </p>
+
+    <p>
+      <%= f.password_field :password, autocomplete: "new-password", class: 'w3-input' %>
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+    </p>
+
+    <p>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'w3-input' %>
+      <%= f.label :password_confirmation %>
+    </p>
+
+    <p>
+      <%= f.submit "Sign up", class: default_button_class %>
+    </p>
+    <p><%= render "devise/shared/links" %></p>
+    <div class="w3-padding-16"></div>
+  <% end %>
+</div>
