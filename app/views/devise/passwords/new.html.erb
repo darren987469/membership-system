@@ -1,0 +1,22 @@
+<div class="w3-container" style="width: 50%; margin: auto;">
+  <div class="w3-padding-32"></div>
+
+  <h2>Forgot your password?</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'w3-container w3-card-4' }) do |f| %>
+    <div class="w3-padding-16"></div>
+    <%= devise_error_messages! %>
+
+    <p>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'w3-input' %>
+      <%= f.label :email %>
+    </p>
+
+    <p>
+      <%= f.submit "Send me reset password instructions", class: 'w3-button w3-section w3-teal w3-ripple' %>
+    </p>
+
+    <p><%= render "devise/shared/links" %></p>
+    <div class="w3-padding-16"></div>
+  <% end %>
+</div>
