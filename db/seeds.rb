@@ -1,7 +1,7 @@
 User.roles.each_key do |role|
   email = "#{role}@gmail.com"
   password = '666666'
-  User.create(email: email, password: password)
+  User.create(email: email, password: password, role: role)
 end
 
 (1..10).to_a.each do |n|
