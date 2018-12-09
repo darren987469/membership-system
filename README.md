@@ -8,11 +8,22 @@
 
 ```shell
 bundle                # install gems
-overcommit --install  # add git hook tool
-overcommit --sign     # apply git hook. execute it after changing .overcommit.yml
 rails db:setup        # create db and seed
 rails s               # start server in http://localhost:300
 ```
+
+## Development
+
+### Install git hook
+
+To ensure code style and quality, we use `rubocop` to check style and `rspec` to test. Install `overcommit` to install git hook for you.
+
+```sh
+overcommit --install  # add git hook tool
+overcommit --sign     # apply git hook. execute it after changing .overcommit.yml
+```
+
+Before committing, git hook run `rubocop`. Before pushing, git hook run `rspec`. Setting file is at [.overcommit.yml](.overcommit.yml)
 
 Ignore git hook: `SKIP=RuboCop git commit`
 
