@@ -12,7 +12,9 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= render 'shared/current_user_info' %>
+    <% if current_user %>
+      <%= render 'shared/current_user_info' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
