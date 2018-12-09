@@ -13,41 +13,38 @@ class ProductsContainer extends React.Component {
 
   render() {
     const { currentUser, products } = this.state
+    let productRows = []
+    for(let i = 0; i < products.length; i = i + 4) {
+      productRows.push(
+        <div key={i} className="w3-row-padding w3-padding-16 w3-center">
+          { products[i] && <ProductWithImage key={ products[i].id } product={ products[i] } /> }
+          { products[i+1] && <ProductWithImage key={ products[i+1].id } product={ products[i+1] } /> }
+          { products[i+2] && <ProductWithImage key={ products[i+2].id } product={ products[i+2] } /> }
+          { products[i+3] && <ProductWithImage key={ products[i+3].id } product={ products[i+3] } /> }
+        </div>
+      )
+    }
     return(
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Images</td>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              products.map(product => <ProductTableRow key={ product.id } product={ product }/>)
-            }
-          </tbody>
-        </table>
-      </div>
+      <div>{ productRows }</div>
     )
   }
 }
 
-function ProductTableRow(props) {
+function ProductWithImage(props) {
   const { product } = props
   const amount = product.price - product.discount_amount
   const amountUI = amount === product.price ?
-    <div>{amount}</div> : <div>{amount}<br></br><s>{product.price}</s></div>
+    <span>${amount}</span> :
+    <span>
+      <strong className="w3-text-red">${amount}</strong><br></br>
+      <s>${product.price}</s>
+    </span>
+  const image = product.images[0]
   return(
-    <tr>
-      <td>{ product.name }</td>
-      <td>{ amountUI }</td>
-      <td>
-        {
-          product.images.map(image => <img key={ image.url } src={ image.url } width="150" height="100" />)
-        }
-      </td>
-    </tr>
+    <div className="w3-quarter">
+      { image && <img src={ image.url } alt={ product.name } style={{ weight: '150px', height: '100px' }}/> }
+      <h3>{ product.name }</h3>
+      <p>{ amountUI }</p>
+    </div>
   )
 }
