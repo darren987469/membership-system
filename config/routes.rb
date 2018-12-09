@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
   resources :products, only: %i[index]
+  patch '/users/upgrade_to_premium', to: 'users#upgrade_to_premium', as: :upgrade_to_premium
 
   namespace :admin do
     resources :users, only: %i[index update]
