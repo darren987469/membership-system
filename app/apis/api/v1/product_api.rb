@@ -11,7 +11,7 @@ module API
           use :pagination
         end
         get do
-          products = Product.all
+          products = Product.with_attached_images
 
           paginate products, with: Entity::V1::PaginatedProduct
         end
