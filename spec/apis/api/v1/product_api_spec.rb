@@ -18,7 +18,7 @@ describe API::V1::ProductAPI, type: :request do
 
       products = Product.with_attached_images.page(params[:page]).per(params[:per_page])
       expect(response).to have_http_status 200
-      expect(response.body).to eq Entity::V1::PaginatedProduct.represent(products).to_json
+      expect(response.body).to eq Entity::V1::PaginatedProduct.represent(products, user: user).to_json
     end
 
     context 'when no login session' do
