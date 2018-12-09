@@ -10,11 +10,14 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <% if current_user %>
-      <%= render 'shared/current_user_info' %>
+      <div style="height: 38px">
+        <%= render 'shared/nav' %>
+      </div>
     <% end %>
-    <%= yield %>
+    <%= render 'shared/flash' %>
+    <div class="w3-main w3-content w3-padding">
+      <%= yield %>
+    </div>
   </body>
 </html>
