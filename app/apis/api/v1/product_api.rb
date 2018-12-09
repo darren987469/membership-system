@@ -13,7 +13,7 @@ module API
         get do
           products = Product.with_attached_images
 
-          paginate products, with: Entity::V1::PaginatedProduct
+          paginate products, with: Entity::V1::PaginatedProduct, user: current_user
         end
       end
     end
