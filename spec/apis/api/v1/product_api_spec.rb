@@ -16,7 +16,7 @@ describe API::V1::ProductAPI, type: :request do
     it 'responses 200 and paginated products' do
       subject
 
-      products = Product.all.page(params[:page]).per(params[:per_page])
+      products = Product.with_attached_images.page(params[:page]).per(params[:per_page])
       expect(response).to have_http_status 200
       expect(response.body).to eq Entity::V1::PaginatedProduct.represent(products).to_json
     end
