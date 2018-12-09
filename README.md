@@ -4,6 +4,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b0cb26d0fbddb0624aa0/maintainability)](https://codeclimate.com/github/darren987469/membership-system/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/darren987469/membership-system/badge.svg?branch=master)](https://coveralls.io/github/darren987469/membership-system?branch=master)
 
+Use cases and system design information is at [system spec](docs/system_spec.md)
+
 ## Install
 
 ```shell

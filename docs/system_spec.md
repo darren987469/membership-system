@@ -49,7 +49,7 @@ In summary, there are four page for current use cases:
 
 https://drive.google.com/file/d/1XtaacOhq8YCGmspAws1bZUJ0pyR_Kdyv/view?usp=sharing
 
-### User
+### User roles and permissions
 
 There are four roles of user: `normal`, `premium`, `admin`, `owner`.
 
@@ -57,6 +57,6 @@ Role | normal | premium | admin | owner
 -----|--------|---------|-------|------
 view Product | V | V | V | V
 Product discount | X | V | V | V
-create/edit Product | X | V | V | V
 enter admin pages | X | X | V | V
+create/edit Product | X | X | V | V
 promote admin | X | X | X | V
