@@ -49,7 +49,7 @@ In summary, there are four page for current use cases:
 
 https://drive.google.com/file/d/1XtaacOhq8YCGmspAws1bZUJ0pyR_Kdyv/view?usp=sharing
 
-### User
+### User roles and permissions
 
 There are four roles of user: `normal`, `premium`, `admin`, `owner`.
 
@@ -57,6 +57,16 @@ Role | normal | premium | admin | owner
 -----|--------|---------|-------|------
 view Product | V | V | V | V
 Product discount | X | V | V | V
-create/edit Product | X | V | V | V
 enter admin pages | X | X | V | V
+create/edit Product | X | X | V | V
 promote admin | X | X | X | V
+
+### 開發方式
+
+1. 分析 use cases ，先確認需求是否明確清楚，如有模糊的地方則提出來確認
+1. 解決方案分析或調查。確認需求後，有很多方法可以完成，分析其中的利弊，選擇適合的解決方法。如有不熟悉的技術也需先行調查，看看是否可以滿足需求。
+1. 分工，依據手上的資源(如前端後端人力，技術成熟度)來細分工作，開成 issues 方便管理及追蹤。Issue 上有 use case (需求), 建議解決方法，system spec (比如說前後端溝通的 API，routes)。
+1. 開發及測試，領取 issue 並著手進行。程式碼需有 test case，風格也須符合工具的規範。完成後開 PR 過 CI 及 review。
+1. 部署到 `staging` 伺服器，進行最後測試準備上線。
+
+本專案有採用 Rails 全端(Rails controller/Rails page)及前後端分離(Grape API/React page)的開發方式，旨在呈現靈活應用各種開發方式來完成專案需求。

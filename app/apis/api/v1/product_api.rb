@@ -6,7 +6,9 @@ module API
       resource :products do
         before { authenticate_user! }
 
-        desc 'Get products'
+        desc 'Get products' do
+          success Entity::V1::PaginatedProduct
+        end
         params do
           use :pagination
         end
