@@ -4,6 +4,7 @@
       <span class="w3-bar-item">
         Email: <%= current_user.email %> | Membership: <%= current_user.role %>
       </span>
+      <%= link_to_admin %>
       <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'w3-bar-item w3-button') %>
     </div>
   </div>
