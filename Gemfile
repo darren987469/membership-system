@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 gem 'awesome_rails_console'
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coveralls', require: false
 gem 'devise'
