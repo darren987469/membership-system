@@ -1,2 +1,13 @@
 <%= render 'shared/admin_nav' %>
-<%= react_component('AdminUsersContainer', currentUser: current_user) %>
+<%=
+  react_component(
+    'AdminUsersContainer',
+    currentUser: current_user,
+    users: @users,
+    currentPage: @users.current_page,
+    totalPages: @users.total_pages,
+    perPage: @users.limit_value,
+    totalCount: @users.total_count,
+    pageEntriesInfo: page_entries_info(@users)
+  )
+%>
