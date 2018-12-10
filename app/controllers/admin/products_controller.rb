@@ -3,7 +3,7 @@ module Admin
     before_action :authorize_action
 
     def index
-      @products = Product.with_attached_images.page(1).per(10)
+      @products = Product.with_attached_images.page(page).per(per)
     end
 
     def show
@@ -38,6 +38,14 @@ module Admin
 
     def product_params
       params.require(:product).permit(:name, :price, images: [])
+    end
+
+    def page
+      params[:page] || 1
+    end
+
+    def per
+      params[:per] || 10
     end
   end
 end
