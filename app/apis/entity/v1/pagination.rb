@@ -4,6 +4,13 @@ module Entity
       include Kaminari::Helpers::HelperMethods
       include ActionView::Helpers::TranslationHelper
 
+      def self.paginated_entity_class(entity_class)
+        Class.new(Entity::V1::Pagination) do
+          present_collection true, :collection
+          expose :collection, as: :results, using: entity_class
+        end
+      end
+
       expose :page, documentation: { type: Integer, desc: 'Current page.' }
       expose :total_pages, documentation: { type: Integer, desc: 'Number of pages.' }
       expose :per_page, documentation: { type: Integer, desc: 'Number of results returned in one page.' }
