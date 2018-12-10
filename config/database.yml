@@ -86,3 +86,4 @@ production:
   database: membership-system_production
   username: membership-system
   password: <%= ENV['MEMBERSHIP-SYSTEM_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
