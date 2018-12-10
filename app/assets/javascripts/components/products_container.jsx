@@ -5,14 +5,34 @@ class ProductsContainer extends React.Component {
     this.state = {
       currentUser: props.currentUser,
       products: data.results,
-      page: data.page,
+      currentPage: data.page,
+      totalPages: data.total_pages,
       perPage: data.per_page,
-      totalCount: data.total_count
+      totalCount: data.total_count,
+      pageEntriesInfo: data.page_entries_info
     }
+    this.getProducts = this.getProducts.bind(this)
+  }
+
+  getProducts(page, perPage) {
+    const params = `page=${page}&per_page=${perPage}`
+    Request.request({}, {
+      url: `/api/v1/products?${params}`,
+      success: (data) => {
+        this.setState({
+          products: data.results,
+          currentPage: data.page,
+          totalPages: data.total_pages,
+          perPage: data.per_page,
+          totalCount: data.total_count,
+          pageEntriesInfo: data.page_entries_info
+        })
+      }
+    })
   }
 
   render() {
-    const { currentUser, products } = this.state
+    const { currentUser, products, currentPage, perPage, totalPages, pageEntriesInfo } = this.state
     let productRows = []
     for(let i = 0; i < products.length; i = i + 4) {
       productRows.push(
@@ -24,8 +44,23 @@ class ProductsContainer extends React.Component {
         </div>
       )
     }
+    const pages = Pagination.paginate(currentPage, totalPages)
     return(
-      <div>{ productRows }</div>
+      <div>
+        { productRows }
+        <div className="w3-center">
+          <div className="w3-bar">
+            {
+              pages.map(
+                page => <a key={ page } className="w3-button" onClick={ () => { this.getProducts(page, perPage) } }>{ page }</a>
+              )
+            }
+          </div>
+        </div>
+        <div className="w3-center">
+          { pageEntriesInfo }
+        </div>
+      </div>
     )
   }
 }
