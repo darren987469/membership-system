@@ -18,7 +18,7 @@ describe Admin::ProductsController, type: :request do
     it 'renders products, default page 1 per 10' do
       subject
 
-      products = Product.with_attached_images.page(1).per(10)
+      products = Product.order(id: :asc).with_attached_images.page(1).per(10)
       product_names = products.map(&:name)
       expect(response.body).to include(*product_names)
     end
