@@ -71,3 +71,16 @@ Basically follow [git flow]((http://nvie.com/posts/a-successful-git-branching-mo
 ```shell
 bundle exec rake
 ```
+
+## Deploy
+
+```sh
+heroku login
+
+git remote add heroku https://git.heroku.com/membership-system.git
+git push heroku master
+
+heroku open
+```
+
+Reference: https://devcenter.heroku.com/articles/getting-started-with-rails5
