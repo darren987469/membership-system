@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MembershipSystem Admin</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if current_user %>
+      <div style="height: 38px">
+        <%= render 'shared/nav' %>
+      </div>
+    <% end %>
+    <%= render 'shared/flash' %>
+    <%= render 'shared/admin_nav' %>
+    <div class="w3-main w3-content" style="margin-left: 15%">
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -11,6 +11,11 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
+    begin
+      DatabaseCleaner.clean
+    rescue NoMethodError => error
+      # workaround for transaction.rollback, where transaction is nil
+      raise unless error.message == "undefined method `rollback' for nil:NilClass"
+    end
   end
 end

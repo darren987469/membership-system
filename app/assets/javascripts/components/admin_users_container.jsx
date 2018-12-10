@@ -2,21 +2,30 @@ class AdminUsersContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [],
-      page: 1,
-      perPage: 10,
-      totalCount: null
+      users: props.users,
+      currentPage: props.currentPage,
+      totalPages: props.totalPages,
+      perPage: props.perPage,
+      totalCount: props.totalCount,
+      pageEntriesInfo: props.pageEntriesInfo
     }
     this.getUsersRequest = this.getUsersRequest.bind(this)
     this.promoteToAdminRequest = this.promoteToAdminRequest.bind(this)
   }
 
-  getUsersRequest() {
-    const { page, perPage } = this.state
+  getUsersRequest(page, perPage) {
+    const params = `page=${page}&per_page=${perPage}`
     Request.request({}, {
-      url: `/api/v1/admin/users?page=${page}&per_page=${perPage}`,
+      url: `/api/v1/admin/users?${params}`,
       success: (data) => {
-        this.setState({ users: data.results, totalCount: data.total_count })
+        this.setState({
+          users: data.results,
+          currentPage: data.page,
+          totalPages: data.total_pages,
+          perPage: data.per_page,
+          totalCount: data.total_count,
+          pageEntriesInfo: data.page_entries_info
+        })
       }
     })
   }
@@ -33,14 +42,10 @@ class AdminUsersContainer extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.getUsersRequest()
-  }
-
   render() {
     const { currentUser } = this.props
-    const { users } = this.state
-    const { promoteToAdminRequest } = this
+    const { users, currentPage, totalPages, perPage, pageEntriesInfo } = this.state
+    const { promoteToAdminRequest, getUsersRequest } = this
 
     return(
       <div>
@@ -48,6 +53,13 @@ class AdminUsersContainer extends React.Component {
           users={ users }
           currentUser={ currentUser }
           promoteToAdminRequest={ promoteToAdminRequest }
+        />
+        <Pagination
+          currentPage={ currentPage }
+          totalPages={ totalPages }
+          perPage={ perPage }
+          pageEntriesInfo={ pageEntriesInfo }
+          onClick={ getUsersRequest }
         />
       </div>
     )

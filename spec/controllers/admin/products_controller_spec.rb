@@ -6,19 +6,33 @@ describe Admin::ProductsController, type: :request do
   before { sign_in user }
 
   describe 'GET /admin/products' do
+    let(:params) { {} }
+
     before do
-      create_list(:product, 3)
+      create_list(:product, 11)
       expect_any_instance_of(Admin::ProductPolicy).to receive(:index?).and_return true
     end
 
-    subject { get admin_products_path }
+    subject { get admin_products_path, params: params }
 
-    it 'renders products' do
+    it 'renders products, default page 1 per 10' do
       subject
 
       products = Product.with_attached_images.page(1).per(10)
       product_names = products.map(&:name)
       expect(response.body).to include(*product_names)
+    end
+
+    context 'given page and per in params' do
+      let(:params) { { page: 2, per: 3 } }
+
+      it 'renders products with given page and per' do
+        subject
+
+        products = Product.with_attached_images.page(params[:page]).per(params[:per])
+        product_names = products.map(&:name)
+        expect(response.body).to include(*product_names)
+      end
     end
   end
 

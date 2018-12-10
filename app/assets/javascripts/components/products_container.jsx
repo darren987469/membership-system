@@ -5,14 +5,34 @@ class ProductsContainer extends React.Component {
     this.state = {
       currentUser: props.currentUser,
       products: data.results,
-      page: data.page,
+      currentPage: data.page,
+      totalPages: data.total_pages,
       perPage: data.per_page,
-      totalCount: data.total_count
+      totalCount: data.total_count,
+      pageEntriesInfo: data.page_entries_info
     }
+    this.getProducts = this.getProducts.bind(this)
+  }
+
+  getProducts(page, perPage) {
+    const params = `page=${page}&per_page=${perPage}`
+    Request.request({}, {
+      url: `/api/v1/products?${params}`,
+      success: (data) => {
+        this.setState({
+          products: data.results,
+          currentPage: data.page,
+          totalPages: data.total_pages,
+          perPage: data.per_page,
+          totalCount: data.total_count,
+          pageEntriesInfo: data.page_entries_info
+        })
+      }
+    })
   }
 
   render() {
-    const { currentUser, products } = this.state
+    const { currentUser, products, currentPage, perPage, totalPages, pageEntriesInfo } = this.state
     let productRows = []
     for(let i = 0; i < products.length; i = i + 4) {
       productRows.push(
@@ -25,7 +45,16 @@ class ProductsContainer extends React.Component {
       )
     }
     return(
-      <div>{ productRows }</div>
+      <div>
+        { productRows }
+        <Pagination
+          currentPage={ currentPage }
+          totalPages={ totalPages }
+          perPage={ perPage }
+          pageEntriesInfo={ pageEntriesInfo }
+          onClick={ this.getProducts }
+        />
+      </div>
     )
   }
 }
