@@ -13,10 +13,6 @@ describe Helper::Pagination do
       expect(entity_class.ancestors).to include Grape::Entity
     end
 
-    it 'documents every attributes' do
-      expect(entity_class.documentation.keys).to match_array %i[results page per_page total_count]
-    end
-
     it 'accepts paginated collection' do
       create_list(:user, 5)
       collection = User.all.page(1).per(2)
@@ -26,8 +22,10 @@ describe Helper::Pagination do
       expected_collection = collection.map { |record| IdEntity.represent(record).as_json }
       expect(subject[:results]).to eq expected_collection
       expect(subject[:page]).to eq 1
+      expect(subject[:total_pages]).to eq 3
       expect(subject[:per_page]).to eq 2
       expect(subject[:total_count]).to eq 5
+      expect(subject[:page_entries_info]).to eq 'Displaying users 1 - 2 of 5 in total'
     end
   end
 end
