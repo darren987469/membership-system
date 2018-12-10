@@ -3,7 +3,7 @@ module Admin
     before_action :authorize_action
 
     def index
-      @products = Product.with_attached_images.page(page).per(per)
+      @products = Product.order(id: :asc).with_attached_images.page(page).per(per)
     end
 
     def show

@@ -15,9 +15,8 @@ class ProductsContainer extends React.Component {
   }
 
   getProducts(page, perPage) {
-    const params = `page=${page}&per_page=${perPage}`
     Request.request({}, {
-      url: `/api/v1/products?${params}`,
+      url: `/api/v1/products?${Request.paginationParams(page, perPage)}`,
       success: (data) => {
         this.setState({
           products: data.results,
@@ -32,26 +31,14 @@ class ProductsContainer extends React.Component {
   }
 
   render() {
-    const { currentUser, products, currentPage, perPage, totalPages, pageEntriesInfo } = this.state
-    let productRows = []
-    for(let i = 0; i < products.length; i = i + 4) {
-      productRows.push(
-        <div key={i} className="w3-row-padding w3-padding-16 w3-center">
-          { products[i] && <ProductWithImage key={ products[i].id } product={ products[i] } /> }
-          { products[i+1] && <ProductWithImage key={ products[i+1].id } product={ products[i+1] } /> }
-          { products[i+2] && <ProductWithImage key={ products[i+2].id } product={ products[i+2] } /> }
-          { products[i+3] && <ProductWithImage key={ products[i+3].id } product={ products[i+3] } /> }
-        </div>
-      )
-    }
+    const { products, ...paginationInfo } = this.state
     return(
       <div>
-        { productRows }
+        <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
+          { products.map(product => <ProductWithImage key={ product.id } product={ product } />) }
+        </div>
         <Pagination
-          currentPage={ currentPage }
-          totalPages={ totalPages }
-          perPage={ perPage }
-          pageEntriesInfo={ pageEntriesInfo }
+          {...paginationInfo}
           onClick={ this.getProducts }
         />
       </div>

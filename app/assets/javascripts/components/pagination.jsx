@@ -4,24 +4,20 @@ class Pagination extends React.Component {
     let left = currentPage - window
     let right = currentPage + window
     let range = []
-    let rangeWithDots = []
 
     for(let i = 1; i <= totalPage; i++) {
-      if(i == 1 || i == totalPage || i >= left && i < right)
+      if(i == 1 || i == totalPage || i >= left && i <= right)
         range.push(i)
     }
 
-    let l
+    let previous = 0
+    let rangeWithDots = []
     for(let i of range) {
-      if(l) {
-        if(i - l === 2) {
-          rangeWithDots.push(l + 1)
-        } else if(i - l !== 1) {
-          rangeWithDots.push('...')
-        }
+      if(i - previous !== 1) {
+        rangeWithDots.push('...')
       }
       rangeWithDots.push(i)
-      l = i
+      previous = i
     }
     return rangeWithDots
   }
@@ -58,7 +54,7 @@ Selected page 1: [1, 2, 3, "...", 20]
 Selected page 2: [1, 2, 3, 4, "...", 20]
 Selected page 3: [1, 2, 3, 4, 5, "...", 20]
 Selected page 4: [1, 2, 3, 4, 5, 6, "...", 20]
-Selected page 5: [1, 2, 3, 4, 5, 6, 7, "...", 20]
+Selected page 5: [1, "...", 3, 4, 5, 6, 7, "...", 20]
 Selected page 6: [1, "...", 4, 5, 6, 7, 8, "...", 20]
 Selected page 7: [1, "...", 5, 6, 7, 8, 9, "...", 20]
 Selected page 8: [1, "...", 6, 7, 8, 9, 10, "...", 20]
@@ -69,7 +65,7 @@ Selected page 12: [1, "...", 10, 11, 12, 13, 14, "...", 20]
 Selected page 13: [1, "...", 11, 12, 13, 14, 15, "...", 20]
 Selected page 14: [1, "...", 12, 13, 14, 15, 16, "...", 20]
 Selected page 15: [1, "...", 13, 14, 15, 16, 17, "...", 20]
-Selected page 16: [1, "...", 14, 15, 16, 17, 18, 19, 20]
+Selected page 16: [1, "...", 14, 15, 16, 17, 18, "...", 20]
 Selected page 17: [1, "...", 15, 16, 17, 18, 19, 20]
 Selected page 18: [1, "...", 16, 17, 18, 19, 20]
 Selected page 19: [1, "...", 17, 18, 19, 20]

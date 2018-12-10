@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Helper::Pagination do
+describe Entity::V1::Pagination do
   describe '.paginated_entity_class' do
     before do
       class IdEntity < Grape::Entity
