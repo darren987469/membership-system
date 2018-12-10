@@ -44,22 +44,16 @@ class ProductsContainer extends React.Component {
         </div>
       )
     }
-    const pages = Pagination.paginate(currentPage, totalPages)
     return(
       <div>
         { productRows }
-        <div className="w3-center">
-          <div className="w3-bar">
-            {
-              pages.map(
-                page => <a key={ page } className="w3-button" onClick={ () => { this.getProducts(page, perPage) } }>{ page }</a>
-              )
-            }
-          </div>
-        </div>
-        <div className="w3-center">
-          { pageEntriesInfo }
-        </div>
+        <Pagination
+          currentPage={ currentPage }
+          totalPages={ totalPages }
+          perPage={ perPage }
+          pageEntriesInfo={ pageEntriesInfo }
+          onClick={ this.getProducts }
+        />
       </div>
     )
   }

@@ -1,5 +1,5 @@
-class Pagination {
-  static paginate(currentPage, totalPage) {
+class Pagination extends React.Component {
+  paginate(currentPage, totalPage) {
     let window = 2
     let left = currentPage - window
     let right = currentPage + window
@@ -25,11 +25,34 @@ class Pagination {
     }
     return rangeWithDots
   }
+
+  render() {
+    const { currentPage, totalPages, perPage, pageEntriesInfo, onClick } = this.props
+    const pages = this.paginate(currentPage, totalPages)
+    return(
+      <div>
+        <div className="w3-center">
+          <div className="w3-bar">
+            {
+              pages.map(
+                page => <a key={ page } className="w3-button" onClick={ ()=> { onClick(page, perPage) } } >{ page }</a>
+              )
+            }
+          </div>
+        </div>
+        <div className="w3-center">
+            { pageEntriesInfo }
+        </div>
+      </div>
+    )
+  }
 }
 
 /*
-for(let i = 1, l = 20; i <= l; i++)
-  console.log(`Select page ${i}:`, Pagination.paginate(i, l))
+for(let i = 1, l = 20; i <= l; i++) {
+  pagination = new Pagination()
+  console.log(`Select page ${i}:`, pagination.paginate(i, l))
+}
 
 Selected page 1: [1, 2, 3, "...", 20]
 Selected page 2: [1, 2, 3, 4, "...", 20]
