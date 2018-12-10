@@ -15,9 +15,8 @@ class ProductsContainer extends React.Component {
   }
 
   getProducts(page, perPage) {
-    const params = `page=${page}&per_page=${perPage}`
     Request.request({}, {
-      url: `/api/v1/products?${params}`,
+      url: `/api/v1/products?${Request.paginationParams(page, perPage)}`,
       success: (data) => {
         this.setState({
           products: data.results,

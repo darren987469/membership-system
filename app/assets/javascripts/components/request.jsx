@@ -7,4 +7,7 @@ class Request {
     }
     $.ajax({ ...defaultOptions, ...options })
   }
+  static paginationParams(page, perPage) {
+    return `page=${page}&per_page=${perPage}`
+  }
 }

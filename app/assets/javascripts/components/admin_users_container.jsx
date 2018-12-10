@@ -14,9 +14,8 @@ class AdminUsersContainer extends React.Component {
   }
 
   getUsersRequest(page, perPage) {
-    const params = `page=${page}&per_page=${perPage}`
     Request.request({}, {
-      url: `/api/v1/admin/users?${params}`,
+      url: `/api/v1/admin/users?${Request.paginationParams(page, perPage)}`,
       success: (data) => {
         this.setState({
           users: data.results,
