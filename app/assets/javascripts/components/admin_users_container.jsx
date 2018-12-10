@@ -15,7 +15,7 @@ class AdminUsersContainer extends React.Component {
 
   getUsersRequest(page, perPage) {
     Request.request({}, {
-      url: `/api/v1/admin/users?${Request.paginationParams(page, perPage)}`,
+      url: `${ADMIN_USERS_PATH}?${Request.paginationParams(page, perPage)}`,
       success: (data) => {
         this.setState({
           users: data.results,
@@ -43,7 +43,7 @@ class AdminUsersContainer extends React.Component {
 
   render() {
     const { currentUser } = this.props
-    const { users, currentPage, totalPages, perPage, pageEntriesInfo } = this.state
+    const { users, ...paginationInfo } = this.state
     const { promoteToAdminRequest, getUsersRequest } = this
 
     return(
@@ -54,10 +54,7 @@ class AdminUsersContainer extends React.Component {
           promoteToAdminRequest={ promoteToAdminRequest }
         />
         <Pagination
-          currentPage={ currentPage }
-          totalPages={ totalPages }
-          perPage={ perPage }
-          pageEntriesInfo={ pageEntriesInfo }
+          {...paginationInfo}
           onClick={ getUsersRequest }
         />
       </div>

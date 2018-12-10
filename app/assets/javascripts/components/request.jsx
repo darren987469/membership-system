@@ -11,3 +11,6 @@ class Request {
     return `page=${page}&per_page=${perPage}`
   }
 }
+
+const ADMIN_USERS_PATH = '/api/v1/users'
+const PRODUCTS_PATH = '/api/v1/products'

@@ -16,7 +16,7 @@ class ProductsContainer extends React.Component {
 
   getProducts(page, perPage) {
     Request.request({}, {
-      url: `/api/v1/products?${Request.paginationParams(page, perPage)}`,
+      url: `${PRODUCTS_PATH}?${Request.paginationParams(page, perPage)}`,
       success: (data) => {
         this.setState({
           products: data.results,
