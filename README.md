@@ -17,7 +17,31 @@ Development: http://localhost:3000/swagger
 bundle                # install gems
 rails db:setup        # create db and seed
 rails s               # start server in http://localhost:300
+
+# postgres db
+brew install postgresql
+brew services start postgresql
 ```
+
+### Use Docker to build environment
+
+```sh
+docker-compose build
+docker-compose up
+
+docker-compose run web rake db:setup
+
+docker-compose down
+
+# after change Gemfile or Compose file, rebuild it
+docker-compose up --build
+docker-compose run web bundle install # sync changes to Gemfile.lock
+
+# shell of containers
+docker-compose run web sh
+```
+
+Reference: https://docs.docker.com/compose/rails
 
 ## Development
 
