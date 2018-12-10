@@ -9,7 +9,11 @@ class Pagination extends React.Component {
       if(i == 1 || i == totalPage || i >= left && i <= right)
         range.push(i)
     }
+    return range
+  }
 
+  paginateWithDots(currentPage, totalPage) {
+    let range = this.paginate(currentPage, totalPage)
     let previous = 0
     let rangeWithDots = []
     for(let i of range) {
@@ -24,7 +28,7 @@ class Pagination extends React.Component {
 
   render() {
     const { currentPage, totalPages, perPage, pageEntriesInfo, onClick } = this.props
-    const pages = this.paginate(currentPage, totalPages)
+    const pages = this.paginateWithDots(currentPage, totalPages)
     return(
       <div>
         <div className="w3-center">
@@ -47,7 +51,7 @@ class Pagination extends React.Component {
 /*
 for(let i = 1, l = 20; i <= l; i++) {
   pagination = new Pagination()
-  console.log(`Select page ${i}:`, pagination.paginate(i, l))
+  console.log(`Select page ${i}:`, pagination.paginateWithDots(i, l))
 }
 
 Selected page 1: [1, 2, 3, "...", 20]
