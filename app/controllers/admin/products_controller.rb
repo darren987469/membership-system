@@ -1,5 +1,5 @@
 module Admin
-  class ProductsController < ApplicationController
+  class ProductsController < Admin::BaseController
     before_action :authorize_action
 
     def index
