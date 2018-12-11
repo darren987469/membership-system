@@ -6,6 +6,13 @@
   <strong>Price: </strong><%= @product.price %>
 </p>
 
+<%= form_for [:admin, @product] do |f| %>
+  <p>
+    <%= f.file_field :images, multiple: true, direct_upload: true, accept: 'image/*' %>
+    <%= f.submit 'Add image', class: default_button_class %>
+  </p>
+<% end %>
+
 <ul>
   <% @product.images.each do |image| %>
     <li>
