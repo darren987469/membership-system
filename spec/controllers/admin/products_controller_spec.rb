@@ -142,4 +142,26 @@ describe Admin::ProductsController, type: :request do
       expect(response.body).to include product.name
     end
   end
+
+  describe 'DELETE /admin/products/:id/destroy_image' do
+    let(:image_file) { fixture_file_upload('spec/fixtures/thumbs-up.png') }
+    let!(:product) { create(:product, images: [image_file]) }
+    let(:image) { product.images.first }
+    let(:params) { { image_id: image.id } }
+    let(:endpoint) { "/admin/products/#{product.id}/destroy_image?#{params.to_param}" }
+
+    subject { delete endpoint }
+
+    before { expect_any_instance_of(Admin::ProductPolicy).to receive(:destroy_image?).and_return true }
+
+    it 'deletes image' do
+      expect(product.images.count).to eq 1
+
+      subject
+
+      expect(product.images.count).to eq 0
+    end
+
+    it { expect(subject).to redirect_to admin_product_path(product) }
+  end
 end

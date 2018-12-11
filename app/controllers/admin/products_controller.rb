@@ -1,7 +1,7 @@
 module Admin
   class ProductsController < Admin::BaseController
     before_action :authorize_action
-    before_action :set_product, only: %i[show edit update destroy]
+    before_action :set_product, only: %i[show edit update destroy destroy_image]
 
     def index
       @products = Product.order(id: :asc).with_attached_images.page(page).per(per)
@@ -24,6 +24,12 @@ module Admin
     end
 
     def edit; end
+
+    def destroy_image
+      @image = @product.images.find(params[:image_id])
+      @image.purge
+      redirect_to admin_product_path(@product)
+    end
 
     private
 
