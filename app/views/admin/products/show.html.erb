@@ -9,7 +9,7 @@
 <ul>
   <% @product.images.each do |image| %>
     <li>
-      <%= image_tag(image, size: product_image_default_size) %>
+      <%= image_tag(image.variant(resize: product_image_default_size)) %>
     </li>
   <% end %>
 </ul>
