@@ -9,17 +9,22 @@
 <%= form_for [:admin, @product] do |f| %>
   <p>
     <%= f.file_field :images, multiple: true, direct_upload: true, accept: 'image/*' %>
-    <%= f.submit 'Add image', class: default_button_class %>
+    <%= f.submit 'Add image' %>
   </p>
 <% end %>
 
-<ul>
+<div style="display: flex; flex-flow: row wrap;">
   <% @product.images.each do |image| %>
-    <li>
-      <%= image_tag(image.variant(resize: product_image_default_size)) %>
-    </li>
+    <div class="w3-padding">
+      <%= image_tag(image.variant(resize: product_image_default_size), style: 'width: 100px; height: 100px') %>
+      <p class="w3-container">
+        <%= link_to('Delete', destroy_image_admin_product_path(@product, image_id: image.id), method: :delete) %>
+      </p>
+    </div>
   <% end %>
-</ul>
+</div>
 
-<%= link_to('Edit', edit_admin_product_path(@product)) %> |
-<%= link_to('Back', admin_products_path) %>
+<p>
+  <%= link_to('Edit', edit_admin_product_path(@product)) %> |
+  <%= link_to('Back', admin_products_path) %>
+</p>
