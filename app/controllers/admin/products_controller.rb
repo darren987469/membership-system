@@ -1,14 +1,13 @@
 module Admin
   class ProductsController < Admin::BaseController
     before_action :authorize_action
+    before_action :set_product, only: %i[show edit update destroy]
 
     def index
       @products = Product.order(id: :asc).with_attached_images.page(page).per(per)
     end
 
-    def show
-      @product = Product.find(params[:id])
-    end
+    def show; end
 
     def create
       @product = Product.create(product_params)
@@ -20,20 +19,21 @@ module Admin
     end
 
     def update
-      @product = Product.find(params[:id])
       @product.update(product_params)
       redirect_to admin_product_path(@product)
     end
 
-    def edit
-      @product = Product.find(params[:id])
-    end
+    def edit; end
 
     private
 
     def authorize_action
       policy_action = "#{action_name}?"
       authorize Product, policy_action, policy_class: Admin::ProductPolicy
+    end
+
+    def set_product
+      @product = @product = Product.find(params[:id])
     end
 
     def product_params
