@@ -8,8 +8,8 @@ Use cases and system design information is at [system spec](docs/system_spec.md)
 
 ## API document
 
-Production: [HOST]/swagger
-Development: http://localhost:3000/swagger
+* Production: https://membership-system.herokuapp.com/swagger
+* Development: http://localhost:3000/swagger
 
 ## Install
 
