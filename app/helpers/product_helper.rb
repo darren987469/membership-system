@@ -1,10 +1,10 @@
 module ProductHelper
-  def product_image_url(product)
+  def product_image(product, resize: product_image_default_size)
     image = product.images.first
-    url_for(image)
+    image.nil? ? nil : image.variant(resize: resize)
   end
 
   def product_image_default_size
-    '150x100'
+    '100x100'
   end
 end

@@ -6,13 +6,25 @@
   <strong>Price: </strong><%= @product.price %>
 </p>
 
-<ul>
-  <% @product.images.each do |image| %>
-    <li>
-      <%= image_tag(url_for(image), size: product_image_default_size) %>
-    </li>
-  <% end %>
-</ul>
+<%= form_for [:admin, @product] do |f| %>
+  <p>
+    <%= f.file_field :images, multiple: true, direct_upload: true, accept: 'image/*' %>
+    <%= f.submit 'Add image' %>
+  </p>
+<% end %>
 
-<%= button_to('Edit', edit_admin_product_path(@product), method: :get) %>
-<%= button_to('Back', admin_products_path, method: :get) %>
+<div style="display: flex; flex-flow: row wrap;">
+  <% @product.images.each do |image| %>
+    <div class="w3-padding">
+      <%= image_tag(image.variant(resize: product_image_default_size), style: 'width: 100px; height: 100px') %>
+      <p class="w3-container">
+        <%= link_to('Delete', destroy_image_admin_product_path(@product, image_id: image.id), method: :delete) %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<p>
+  <%= link_to('Edit', edit_admin_product_path(@product)) %> |
+  <%= link_to('Back', admin_products_path) %>
+</p>

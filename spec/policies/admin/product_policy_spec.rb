@@ -13,6 +13,7 @@ describe Admin::ProductPolicy do
     it { should_not permit(:update) }
     it { should_not permit(:edit) }
     it { should_not permit(:destroy) }
+    it { should_not permit(:destroy_image) }
   end
 
   context 'when premium user' do
@@ -25,6 +26,7 @@ describe Admin::ProductPolicy do
     it { should_not permit(:update) }
     it { should_not permit(:edit) }
     it { should_not permit(:destroy) }
+    it { should_not permit(:destroy_image) }
   end
 
   context 'when admin user' do
@@ -37,6 +39,7 @@ describe Admin::ProductPolicy do
     it { should permit(:update) }
     it { should permit(:edit) }
     it { should_not permit(:destroy) }
+    it { should permit(:destroy_image) }
   end
 
   context 'when owner user' do
@@ -49,5 +52,6 @@ describe Admin::ProductPolicy do
     it { should permit(:update) }
     it { should permit(:edit) }
     it { should_not permit(:destroy) }
+    it { should permit(:destroy_image) }
   end
 end

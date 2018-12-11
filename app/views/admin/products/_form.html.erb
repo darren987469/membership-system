@@ -7,8 +7,5 @@
     <%= f.number_field :price, step: 1, class: 'w3-input' %>
     <%= f.label :price, required: true %>
   </p>
-  <p>
-    <%= f.file_field :images, multiple: true, class: 'w3-input' %>
-  </p>
   <%= f.submit class: default_button_class %>
 <% end %>

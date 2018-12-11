@@ -3,12 +3,21 @@ require 'rails_helper'
 describe ProductHelper do
   include described_class
 
-  describe '#product_image_url' do
-    let!(:product) { create(:product, images: [fixture_file_upload('spec/fixtures/thumbs-up.png')]) }
+  describe '#product_image(product, resize: nil)' do
+    let!(:product) { create(:product, images: images) }
 
-    it 'returns url for first image of product' do
-      expected = url_for(product.images.first)
-      expect(product_image_url(product)).to eq expected
+    context 'product has image' do
+      let(:images) { [] }
+
+      it { expect(product_image(product)).to be_nil }
+    end
+
+    context 'product has no image' do
+      let(:images) { [fixture_file_upload('spec/fixtures/thumbs-up.png')] }
+
+      it 'returns resized image variant of the product' do
+        expect(product_image(product)).to be_a ActiveStorage::Variant
+      end
     end
   end
 end
