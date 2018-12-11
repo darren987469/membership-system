@@ -23,5 +23,9 @@ module Admin
     def edit?
       index?
     end
+
+    def destroy_image?
+      index?
+    end
   end
 end
