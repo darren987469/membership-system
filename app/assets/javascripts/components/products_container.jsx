@@ -56,9 +56,10 @@ function ProductWithImage(props) {
       <s>${product.price}</s>
     </span>
   const image = product.images[0]
+  const imageUrl = image ? image.url : '/no-photo-available-icon.jpg'
   return(
     <div className="w3-quarter">
-      { image && <img src={ image.url } alt={ product.name } style={{ weight: '150px', height: '100px' }}/> }
+      <img src={ imageUrl } alt={ product.name } style={{ weight: '150px', height: '100px' }}/>
       <h3>{ product.name }</h3>
       <p>{ amountUI }</p>
     </div>

@@ -12,5 +12,5 @@ class Request {
   }
 }
 
-const ADMIN_USERS_PATH = '/api/v1/users'
+const ADMIN_USERS_PATH = '/api/v1/admin/users'
 const PRODUCTS_PATH = '/api/v1/products'
