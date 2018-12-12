@@ -70,3 +70,26 @@ promote admin | X | X | X | V
 1. 部署到 `staging` 伺服器，進行最後測試準備上線。
 
 本專案有採用 Rails 全端(Rails controller/Rails page)及前後端分離(Grape API/React page)的開發方式，旨在呈現靈活應用各種開發方式來完成專案需求。
+
+原本有想要將 product image direct upload 的部分也做成前後端分離，但目前仍有一個未解的 [issue on ActiveStorage](https://github.com/rails/rails/issues/32208) ，會有 `CSRF` 問題，暫時保留原本的做法。
+
+### Codebase style guide
+
+#### Backend
+
+We separate business logic to many abstraction layers: `authentication`, `validation`, `authorization`, `operation`, and `presentation`. Each layer has it responsibility:
+
+* Authentication: Authenticate user.
+* Validation: Validation request parameters whether fulfill the requirement.
+* Authorization: Validate user authorization to do the operation (read/create/update/delete resource). They are defined in `app/policies` directory.
+* Operation: Prepare the data (CRUD to resources).
+* Presentation: Transform data format. They are defined in `app/apis/entity` directory.
+
+For detailed explanation, please see the article [API style](https://darren987469.github.io/API-style/).
+
+#### Frontend
+
+Use react as UI framework. Components are defined in `app/assets/javascripts/components`. There are two types of components: `container` and `presenter`.
+
+* Container: Hold all the data and API request (like controller in Rails). Naming convention: `XXX_container.jsx`. They are react components.
+* Presenter: Present data from the container. Usually, they are stateless functional components.
