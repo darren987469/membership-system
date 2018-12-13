@@ -8,7 +8,7 @@
 
 <%= form_for [:admin, @product] do |f| %>
   <p>
-    <%= f.file_field :images, multiple: true, direct_upload: true, accept: 'image/*' %>
+    <%= f.file_field :images, multiple: true, required: true, direct_upload: true, accept: 'image/png,image/jpeg' %>
     <%= f.submit 'Add image' %>
   </p>
 <% end %>
