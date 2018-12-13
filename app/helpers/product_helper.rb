@@ -1,5 +1,5 @@
 module ProductHelper
-  def product_image(product, resize: product_image_default_size)
+  def product_default_image(product, resize: product_image_default_size)
     image = product.images.first
     image.nil? ? nil : image.variant(resize: resize)
   end

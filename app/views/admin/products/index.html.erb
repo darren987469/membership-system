@@ -15,7 +15,7 @@
       <tr>
         <td><%= link_to(product.name, admin_product_path(product)) %></td>
         <td><%= product.price %></td>
-        <% image = product_image(product) %>
+        <% image = product_default_image(product) %>
         <td><%= image_tag(image) if image %></td>
     <% end %>
   </tbody>
